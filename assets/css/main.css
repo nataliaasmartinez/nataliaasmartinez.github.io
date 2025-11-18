@@ -523,11 +523,6 @@ section,
   transition: all 0.3s ease-in-out;
 }
 
-.portfolio .portfolio-filters li:hover,
-.portfolio .portfolio-filters li.filter-active {
-  border-bottom: 2px solid var(--default-color);
-  padding-bottom: 3px;
-}
 
 .portfolio .portfolio-filters li:first-child {
   margin-left: 0;
