@@ -1282,3 +1282,118 @@ section,
 .contact .php-email-form button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
+
+/* Global font choices */
+:root {
+    --bs-body-font-family: "Inter", sans-serif;
+}
+h1, h2, h3 {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: .75rem;
+}
+
+h3 {
+    font-size: 1.6rem;
+    line-height: 1.3;
+    margin-bottom: .5rem;
+}
+
+p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+}
+
+
+a {
+    color: #0044cc;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+a:hover {
+    color: #002a80;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #001e5c;
+}
+
+.btn-custom {
+    background: #0044cc;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+.btn-custom:hover {
+    background: #003399;
+}
+
+.btn-custom:active {
+    background: #002266;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.section-sm {
+    padding: 40px 0;
+}
+
+.card-surface {
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.header {
+    background: #fdfdfd;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+
+.header .logo {
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: -0.3px;
+}
+
+.navmenu a {
+    padding: 10px 18px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.navmenu a:hover {
+    background: #eef3ff;
+    color: #002a80;
+}
+
+.back-to-top {
+    background: #0044cc;
+    color: #fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    transition: 0.25s;
+}
+
+.back-to-top:hover {
+    background: #003399;ccc
