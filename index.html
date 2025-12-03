@@ -4,43 +4,35 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>MyPortfolio</title>
+  <title>Natalia - Portfolio &amp; Resume</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
-  <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-  <!-- Custom CSS (your exercise file) -->
   <link href="assets/css/custom.css" rel="stylesheet">
-</head>
 
-<body class="index-page">
 
-  <!-- Preloader (CSS-only spinner) -->
-  <div id="preloader"></div>
+  </head>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+<body class="index-page loading">
+<div id="loader" class="loader"></div>
+
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid  position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
         <h1 class="sitename">MyPortfolio</h1>
@@ -48,119 +40,439 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-
-          <li class="dropdown">
-            <a href="#"><span>More</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
     </div>
-  </header><!-- End Header -->
+  </header>
 
+  <main class="main">
 
-  <main id="main">
-
-    <!-- ======= Hero / About Me ======= -->
-    <section id="hero" class="hero section fade-in-section">
-      <div class="container" data-aos="fade-up">
+    <section id="about" class="about section custom-fade">
+      <div class="container">
         <h2>About Me</h2>
         <p>
-          I am a material engineer with a strong interest in web development and design.
-          I enjoy working with HTML, CSS, and JavaScript to create clean, responsive
-          websites that are easy to use. In my coursework and personal projects I focus
-          on writing readable code and learning modern tools like Bootstrap. Outside of
-          coding, I like exploring new technologies, collaborating on projects with
-          classmates, and improving my problem-solving skills through practice and
-          experimentation.
+          I am a material engineer with a strong interest in web development and
+          design. I enjoy working with HTML, CSS, and JavaScript to create clean, responsive
+          websites that are easy to use. In my coursework and personal projects I focus on
+          writing readable code and learning modern tools like Bootstrap. Outside of coding,
+          I like exploring new technologies, collaborating on projects with classmates, and
+          improving my problem-solving skills through practice and experimentation.
         </p>
-        <a href="#portfolio" class="btn btn-primary">My Work</a>
+        <a class="btn-custom custom-hover" href="#portfolio">My work</a>
       </div>
     </section>
+    <section id="resume" class="resume section custom-fade">
+      <div class="container">
+        <h2>Resume</h2>
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section fade-in-section">
-      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-lg-6">
+            <h3>Education</h3>
 
-        <h2>Services</h2>
-        <p>I am learning front-end development tools and applying them through practice.</p>
+            <div class="resume-item">
+              <h4>Script programming</h4>
+              <h5>2023 - Present</h5>
+              <p><em>VGTU</em></p>
+              <p>Relevant coursework: web development, programming, and related subjects.</p>
+            </div>
 
-        <div class="row gy-4">
-
-          <div class="col-lg-4">
-            <h3>Front-End Basics</h3>
-            <p>Working with HTML5, CSS3 and Bootstrap to build responsive layouts.</p>
-          </div>
-
-          <div class="col-lg-4">
-            <h3>JavaScript</h3>
-            <p>Adding interactivity, animations and dynamic behavior to websites.</p>
-          </div>
-
-          <div class="col-lg-4">
-            <h3>YouTube Video</h3>
-            <div class="ratio ratio-16x9">
-              <iframe
-                src="https://www.youtube.com/embed/D8U4G5kcpcM?si=-_THnmjvSXBXtHOO"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                frameborder="0"
-                allowfullscreen>
-              </iframe>
+            <div class="resume-item">
+              <h4>UPM</h4>
+              <h5>2020-2025</h5>
+              <p><em>Material Ingineer</em></p>
+              <p>We study the different types of materials</p>
             </div>
           </div>
 
+          <div class="col-lg-6">
+            <h3>Experience</h3>
+
+            <div class="resume-item">
+              <h4>Student</h4>
+              <h5>2020-2025</h5>
+              <p><em>Materials</em></p>
+              <p>Study the 3 different types of materials</p>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
+    <section id="portfolio" class="portfolio section">
 
-    <!-- ======= Portfolio ======= -->
-    <section id="portfolio" class="portfolio section fade-in-section">
-      <div class="container" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Some example projects and exercises.</p>
+
+    <section id="portfolio2" class="portfolio section">
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <div class="row align-items-center">
+            <div class="col-lg-7 portfolio-info">
+              <h3>Hey, I'm Natalia</h3>
+              <p> I build simple and responsive web projects while learning modern front-end tools.
+  Below are a few examples of class assignments and a photo of me.</p>
+            </div>
+            <div class="col-lg-5 text-center text-lg-end">
+              <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+                <li data-filter="*" class="filter-active">All</li>
+                <li data-filter=".filter-app">App</li>
+                <li data-filter=".filter-product">Product</li>
+                <li data-filter=".filter-branding">Branding</li>
+                <li data-filter=".filter-books">Books</li>
+              </ul></div>
+          </div>
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200" style="position: relative; height: 1344px;">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product" style="position: absolute; left: 0px; top: 1008px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/img_1.jpg" class="img-fluid" alt="Natalia">
+                <div class="portfolio-info">
+                  <h4>Me 1</h4>
+                  <p>A picture of me in Norway</p>
+                  <div>
+                    <a href="assets/img/img_1.jpg" title="Me 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div><div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding" style="position: absolute; left: 440px; top: 1008px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/img_2.jpg" class="img-fluid" alt="using laser we examinate the samples">
+                <div class="portfolio-info">
+                  <h4>Me 2</h4>
+                  <p>Nanomaterials Lab work</p>
+                  <div>
+                    <a href="assets/img/img_2.jpg" title="Me 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div><div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books" style="position: absolute; left: 880px; top: 1008px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/img_3.jpg" class="img-fluid" alt="In this picture we examinate the microstructure of the material">
+                <div class="portfolio-info">
+                  <h4>Me 3</h4>
+                  <p>Aerospace material lab work</p>
+                  <div>
+                    <a href="assets/img/img_3.jpg" title="Me 3" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div></div></div>
+
       </div>
-    </section>
 
-    <!-- ======= Contact ======= -->
-    <section id="contact" class="contact section fade-in-section">
-      <div class="container" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>You can reach me through university channels or email.</p>
+    </section><section id="clients" class="clients section light-background">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>My Clients</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 2,
+                  "spaceBetween": 40
+                },
+                "480": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 60
+                },
+                "640": {
+                  "slidesPerView": 4,
+                  "spaceBetween": 80
+                },
+                "992": {
+                  "slidesPerView": 6,
+                  "spaceBetween": 120
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
       </div>
-    </section>
 
-  </main>
+    </section><section id="services" class="services section">
+      <div class="row gy-4 mt-4">
+        <div class="col-lg-4">
+          <h3>Local Video</h3>
+          <video controls width="100%">
+            <source src="assets/media/videolab.MOV" type="video/mp4">
+            Class video
+          </video>
+        </div>
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+        <div class="col-lg-4">
+          <h3>YouTube Video</h3>
+          <iframe width="100%" height="215"
+                  src="https://www.youtube.com/embed/D8U4G5kcpcM?si=-_THnmjvSXBXtHOO"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="col-lg-4">
+          <h3>Audio Recording</h3>
+          <audio controls>
+            <source src="assets/media/sound.mp3" type="audio/mpeg">
+            Audio
+          </audio>
+        </div>
+      </div>
+
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Services</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item  position-relative">
+              <div class="icon">
+                <i class="bi bi-activity"></i>
+              </div>
+              <h3>Nesciunt Mete</h3>
+              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
+              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-broadcast"></i>
+              </div>
+              <h3>Eosle Commodi</h3>
+              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
+              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-easel"></i>
+              </div>
+              <h3>Ledo Markt</h3>
+              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-bounding-box-circles"></i>
+              </div>
+              <h3>Asperiores Commodit</h3>
+              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
+              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-calendar4-week"></i>
+              </div>
+              <h3>Velit Doloremque</h3>
+              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
+              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-chat-square-text"></i>
+              </div>
+              <h3>Dolori Architecto</h3>
+              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
+              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div></div>
+
+      </div>
+
+    </section><section id="testimonials" class="testimonials section">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Testimonials</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                <h3>Saul Goodman</h3>
+                <h4>Ceo &amp; Founder</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                <h3>Sara Wilsson</h3>
+                <h4>Designer</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                <h3>Jena Karlis</h3>
+                <h4>Store Owner</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                <h3>Matt Brandon</h3>
+                <h4>Freelancer</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div><div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                <h3>John Larson</h3>
+                <h4>Entrepreneur</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div></div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section></main>
+
+  <footer id="footer" class="footer light-background">
+
     <div class="container">
-      <p class="mb-0">&copy; 2025 MyPortfolio. All Rights Reserved.</p>
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">MyPortfolio</strong> <span>All Rights Reserved</span></p>
+      </div>
+      <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-twitter-x"></i></a>
+        <a href=""><i class="bi bi-facebook"></i></a>
+        <a href=""><i class="bi bi-instagram"></i></a>
+        <a href=""><i class="bi bi-linkedin"></i></a>
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
     </div>
+
   </footer>
 
-  <!-- Back to top -->
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center">
-    <i class="bi bi-arrow-up-short"></i>
-  </a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-  <!-- Main JS -->
   <script src="assets/js/main.js"></script>
 
-</body>
-</html>
+  <script>
+    window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        const body = document.body;
+        // Espera un momento para que se vea la animación del loader
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            loader.addEventListener('transitionend', () => {
+                loader.style.display = 'none';
+                body.classList.remove('loading');
+            });
+        }, 500); // 500ms de retraso
+    });
+  </script>
 
+</body>
+
+</html>
