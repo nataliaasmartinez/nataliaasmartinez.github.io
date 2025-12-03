@@ -472,7 +472,24 @@
         }, 500); // 500ms de retraso
     });
   </script>
+<script src="assets/js/main.js"></script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const loader = document.getElementById('loader');
+      // Oculta el loader de forma animada (opcional: puedes usar un temporizador)
+      // Usaremos un pequeño retraso para que la animación del spinner sea visible.
+      setTimeout(() => {
+        if (loader) {
+          loader.style.display = 'none';
+        }
+      }, 500); // 500 milisegundos (0.5 segundos) de retraso
+    });
+  </script>
+
+</body>
+
+</html>
 </body>
 
 </html>
