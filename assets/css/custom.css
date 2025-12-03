@@ -105,6 +105,11 @@
     transition: none !important;
     opacity: 1 !important; /* Asegura que el contenido se vea */
     transform: none !important;
+       .decor-shape,
+  .animated-gradient-bg {
+    animation: none !important;
+  }
+
   }
 
   /* El contenido se muestra inmediatamente sin la clase loading */
@@ -119,5 +124,56 @@
     display: none !important;
   }
 
+}
+/* ------------------------------
+   5. Animated gradient background (optional task)
+--------------------------------*/
+.animated-gradient-bg {
+  background: linear-gradient(120deg, #e0f4ff, #fce4ff, #fffbe6);
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* ------------------------------
+   6. Decorative CSS shapes (optional task)
+--------------------------------*/
+.decor-shape {
+  position: fixed;
+  z-index: -1;          /* Para que queden detrás del contenido */
+  opacity: 0.4;
+}
+
+/* Círculo flotante */
+.decor-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 183, 197, 0.8);
+  top: 12%;
+  left: 6%;
+  animation: floatShape 14s ease-in-out infinite;
+}
+
+/* Triángulo flotante */
+.decor-triangle {
+  width: 0;
+  height: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 130px solid rgba(179, 229, 252, 0.8);
+  bottom: 10%;
+  right: 8%;
+  animation: floatShape 11s ease-in-out infinite reverse;
+}
+
+@keyframes floatShape {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
 }
 
