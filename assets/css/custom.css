@@ -95,7 +95,7 @@
    4. prefers-reduced-motion (Requisito 5)
 --------------------------------*/
 @media (prefers-reduced-motion: reduce) {
-  /* Elimina todas las animaciones y transiciones */
+  /* Elimina animaciones */
   .loader,
   .loader::after,
   .custom-fade,
@@ -103,12 +103,28 @@
   .readmore.custom-hover {
     animation: none !important;
     transition: none !important;
-    opacity: 1 !important; /* Asegura que el contenido se vea */
+    opacity: 1 !important;
     transform: none !important;
-       .decor-shape,
+  }
+
+  .decor-shape,
   .animated-gradient-bg {
     animation: none !important;
   }
+
+  .loading .main,
+  .loading .header,
+  .loading .footer {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: none !important;
+  }
+
+  #loader {
+    display: none !important;
+  }
+}
+
 
   }
 
