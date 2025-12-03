@@ -27,7 +27,7 @@
 
   </head>
 
-<body class="index-page loading">
+<body class="index-page loading animated-gradient-bg">
 <div id="loader" class="loader"></div>
 
 
@@ -55,6 +55,9 @@
   </header>
 
   <main class="main">
+    <!-- Decorative CSS shapes (optional task) -->
+    <div class="decor-shape decor-circle"></div>
+    <div class="decor-shape decor-triangle"></div>
 
     <section id="about" class="about section custom-fade">
       <div class="container">
@@ -67,7 +70,7 @@
           I like exploring new technologies, collaborating on projects with classmates, and
           improving my problem-solving skills through practice and experimentation.
         </p>
-        <a class="btn-custom custom-hover" href="#portfolio">My work</a>
+       <a class="btn-custom custom-hover" href="#portfolio">My work</a>
       </div>
     </section>
     <section id="resume" class="resume section custom-fade">
@@ -273,7 +276,10 @@
               </div>
               <h3>Nesciunt Mete</h3>
               <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+            <a href="service-details.html" class="readmore custom-hover stretched-link">
+             Read more <i class="bi bi-arrow-right"></i>
+            </a>
+
             </div>
           </div><div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item position-relative">
@@ -282,7 +288,10 @@
               </div>
               <h3>Eosle Commodi</h3>
               <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+              <a href="service-details.html" class="readmore custom-hover stretched-link">
+              Read more <i class="bi bi-arrow-right"></i>
+              </a>
+
             </div>
           </div><div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="service-item position-relative">
@@ -291,7 +300,10 @@
               </div>
               <h3>Ledo Markt</h3>
               <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+              <a href="service-details.html" class="readmore custom-hover stretched-link">
+              Read more <i class="bi bi-arrow-right"></i>
+              </a>
+
             </div>
           </div><div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
             <div class="service-item position-relative">
@@ -300,7 +312,10 @@
               </div>
               <h3>Asperiores Commodit</h3>
               <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+              <a href="service-details.html" class="readmore custom-hover stretched-link">
+              Read more <i class="bi bi-arrow-right"></i>
+              </a>
+
             </div>
           </div><div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
             <div class="service-item position-relative">
@@ -309,7 +324,10 @@
               </div>
               <h3>Velit Doloremque</h3>
               <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+              <a href="service-details.html" class="readmore custom-hover stretched-link">
+              Read more <i class="bi bi-arrow-right"></i>
+              </a>
+
             </div>
           </div><div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
             <div class="service-item position-relative">
@@ -318,7 +336,10 @@
               </div>
               <h3>Dolori Architecto</h3>
               <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-              <a href="service-details.html" class="readmore stretched-link custom-hover">Read more <i class="bi bi-arrow-right"></i></a>
+              <a href="service-details.html" class="readmore custom-hover stretched-link">
+              Read more <i class="bi bi-arrow-right"></i>
+              </a>
+
             </div>
           </div></div>
 
@@ -457,6 +478,26 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <script src="assets/js/main.js"></script>
+    <script>
+    // Cuando la página termina de cargar
+    window.addEventListener('load', function () {
+      const loader = document.getElementById('loader');
+
+      // Quita la clase "loading" del body para mostrar el contenido
+      document.body.classList.remove('loading');
+
+      // Desvanece y oculta el loader
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(function () {
+          loader.style.display = 'none';
+        }, 500); // mismo tiempo que la transición en CSS
+      }
+    });
+  </script>
+</body>
+</html>
+
 
   <script>
     window.addEventListener('load', () => {
