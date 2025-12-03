@@ -307,4 +307,103 @@
 .rating-label {
     text-align: center;
 }
+/* ============================
+   MEMORY GAME STYLES
+   ============================ */
+
+#memory-game {
+  padding: 40px 0;
+}
+
+.memory-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.memory-board {
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+/* Grid según dificultad */
+.memory-board.grid-easy {
+  grid-template-columns: repeat(4, 80px);   /* 4 x 3 = 12 cartas */
+}
+
+.memory-board.grid-hard {
+  grid-template-columns: repeat(6, 70px);   /* 6 x 4 = 24 cartas */
+}
+
+/* Carta base */
+.memory-card {
+  width: 80px;
+  height: 100px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  perspective: 600px;
+}
+
+.memory-card.disabled {
+  pointer-events: none;
+}
+
+/* Parte interna con efecto flip */
+.memory-card .card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+
+/* Cara delantera y trasera */
+.memory-card .card-front,
+.memory-card .card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+/* Cara oculta (dorso) */
+.memory-card .card-front {
+  background: #222;
+  color: #fff;
+}
+
+/* Cara visible con el icono */
+.memory-card .card-back {
+  background: #fff;
+  border: 2px solid #222;
+  transform: rotateY(180deg);
+}
+
+/* Estados de la carta */
+.memory-card.flipped .card-inner,
+.memory-card.matched .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Mensaje de victoria */
+.memory-win-message {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 1.4em;
+}
+
+/* Colores del mensaje de victoria */
+.memory-win-message.win {
+  color: #0a7f23;
+}
 
