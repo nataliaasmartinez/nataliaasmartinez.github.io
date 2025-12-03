@@ -268,4 +268,167 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.error-message-text').forEach(el => el.textContent = '');
         checkFormValidity();
     });
+        // ============================
+    // MEMORY GAME LOGIC
+    // ============================
+    const memorySection = document.getElementById('memory-game');
+    if (memorySection) {
+
+        const board = document.getElementById('memory-board');
+        const difficultySelect = document.getElementById('memory-difficulty');
+        const startBtn = document.getElementById('start-game');
+        const restartBtn = document.getElementById('restart-game');
+        const movesSpan = document.getElementById('memory-moves');
+        const matchesSpan = document.getElementById('memory-matches');
+        const winMessage = document.getElementById('memory-win-message');
+
+        // Conjunto de iconos (12 = 12 parejas posibles)
+        const CARD_ICONS = ['🍎','🚀','🐱','🎧','📚','⚽','🎲','💡','🌙','🍕','🌈','🎵'];
+
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+        let moves = 0;
+        let matches = 0;
+        let totalPairs = 0;
+        let currentDifficulty = 'easy';
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createDeck(pairCount) {
+            const selected = CARD_ICONS.slice(0, pairCount);
+            const deck = [...selected, ...selected]; // cada icono dos veces
+            return shuffle(deck);
+        }
+
+        function resetStats() {
+            moves = 0;
+            matches = 0;
+            updateStats();
+            winMessage.textContent = '';
+            winMessage.classList.remove('win');
+        }
+
+        function updateStats() {
+            movesSpan.textContent = moves;
+            matchesSpan.textContent = `${matches}/${totalPairs}`;
+        }
+
+        function setupBoard(difficulty) {
+            currentDifficulty = difficulty;
+            totalPairs = (difficulty === 'hard') ? 12 : 6; // 12 parejas (24 cartas) o 6 parejas (12 cartas)
+
+            const deck = createDeck(totalPairs);
+            board.innerHTML = '';
+
+            board.classList.toggle('grid-easy', difficulty === 'easy');
+            board.classList.toggle('grid-hard', difficulty === 'hard');
+
+            deck.forEach(icon => {
+                const card = document.createElement('button');
+                card.type = 'button';
+                card.className = 'memory-card';
+                card.dataset.icon = icon;
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-front">?</div>
+                        <div class="card-back">${icon}</div>
+                    </div>
+                `;
+                card.addEventListener('click', handleCardClick);
+                board.appendChild(card);
+            });
+
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+            resetStats();
+        }
+
+        function handleCardClick(e) {
+            const card = e.currentTarget;
+
+            if (lockBoard) return;
+            if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+            if (card === firstCard) return;
+
+            card.classList.add('flipped');
+
+            if (!firstCard) {
+                firstCard = card;
+                return;
+            }
+
+            secondCard = card;
+            moves++;
+            updateStats();
+
+            checkForMatch();
+        }
+
+        function checkForMatch() {
+            const isMatch = firstCard.dataset.icon === secondCard.dataset.icon;
+
+            if (isMatch) {
+                disableMatchedCards();
+            } else {
+                unflipCards();
+            }
+        }
+
+        function disableMatchedCards() {
+            firstCard.classList.add('matched');
+            secondCard.classList.add('matched');
+
+            firstCard = null;
+            secondCard = null;
+            matches++;
+            updateStats();
+
+            if (matches === totalPairs) {
+                winMessage.textContent = `You win! Completed in ${moves} moves.`;
+                winMessage.classList.add('win');
+            }
+        }
+
+        function unflipCards() {
+            lockBoard = true;
+            setTimeout(() => {
+                if (firstCard) firstCard.classList.remove('flipped');
+                if (secondCard) secondCard.classList.remove('flipped');
+                firstCard = null;
+                secondCard = null;
+                lockBoard = false;
+            }, 800);
+        }
+
+        // Eventos de controles
+        if (startBtn) {
+            startBtn.addEventListener('click', () => {
+                setupBoard(difficultySelect.value);
+            });
+        }
+
+        if (restartBtn) {
+            restartBtn.addEventListener('click', () => {
+                setupBoard(currentDifficulty);
+            });
+        }
+
+        if (difficultySelect) {
+            difficultySelect.addEventListener('change', () => {
+                setupBoard(difficultySelect.value);
+            });
+        }
+
+        // Inicializar tablero en modo "easy"
+        setupBoard('easy');
+    }
+
 });
