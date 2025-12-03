@@ -195,4 +195,116 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+/* Custom CSS for LAB 5 Forms */
+
+.rating-label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--default-color, #333); 
+    display: block; 
+    text-align: left;
+}
+
+.rating-input {
+    max-width: 100px; /* Make the input box smaller for the 1-10 rating */
+    text-align: center;
+}
+
+/* Style for the average display */
+.average-display {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Color codes for the average */
+.average-red {
+    background-color: #ffdddd; /* Light red background */
+    color: #cc0000; /* Dark red text */
+    border: 1px solid #cc0000;
+}
+.average-orange {
+    background-color: #ffebcc; /* Light orange background */
+    color: #e68a00; /* Dark orange text */
+    border: 1px solid #e68a00;
+}
+.average-green {
+    background-color: #ddffdd; /* Light green background */
+    color: #008000; /* Dark green text */
+    border: 1px solid #008000;
+}
+
+/* Style for the confirmation popup */
+#submission-confirmation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 40px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-size: 1.5em;
+    display: none; /* Initially hidden */
+    text-align: center;
+    /* Optional: Add a simple animation for visibility */
+    animation: fadeinout 4s forwards;
+}
+
+@keyframes fadeinout {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* --- Styles for Real-Time Validation (Optional Task) --- */
+
+/* Style for invalid fields (red border) */
+.form-control.is-invalid {
+    border-color: #dc3545 !important;
+    padding-right: calc(1.5em + .75rem);
+    /* The background image shows a small 'x' or warning icon */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+/* Style for valid fields (green border) */
+.form-control.is-valid {
+    border-color: #198754 !important;
+    padding-right: calc(1.5em + .75rem);
+    /* The background image shows a small checkmark icon */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-.4-.3-1 .1-1.4.4-.4 1-.3 1.4.1l1.7 2 4.1-4.3c.4-.4 1-.3 1.4.1.4.4.3 1-.1 1.4l-4.8 5.1c-.2.2-.5.3-.8.3-.3 0-.6-.1-.8-.3z'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+/* Style for the error message text (Task 2) */
+.error-message-text {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545; /* Red color */
+}
+
+/* Style for disabled button (Task 4) */
+#submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Ensure rating labels are centered (from previous step) */
+.rating-label {
+    text-align: center;
+}
 
