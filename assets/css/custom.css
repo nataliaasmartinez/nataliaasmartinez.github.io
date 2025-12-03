@@ -1,31 +1,26 @@
-/* ------------------------------
-   1. Loader animation
---------------------------------*/
-.loader {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 6px solid #ccc;
-  border-top-color: #000;
-  margin: 20px auto;
-  animation: spin 1s linear infinite;
+/* =========================================================
+   CUSTOM CSS FOR LAB ASSIGNMENT
+   ========================================================= */
+
+/* ========== Animated Gradient Background (optional task) ========== */
+.hero {
+  background: linear-gradient(120deg, #2b6ef2, #8e2bf2, #f22b86);
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease-in-out infinite;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+/* Gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* ------------------------------
-   2. Fade-in animation for sections
---------------------------------*/
-section {
-  opacity: 0;
-  animation: fadeIn 1.2s ease forwards;
-}
-
-@keyframes fadeIn {
+/* ========== Section Fade-In Animation (required) ========== */
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -36,37 +31,86 @@ section {
   }
 }
 
-/* ------------------------------
-   3. Hover animation for buttons
---------------------------------*/
-.btn-custom,
-.readmore {
-  transition: transform 0.3s ease;
+.fade-in-section {
+  opacity: 0;
+  animation: fadeInUp 0.9s ease-out forwards;
 }
 
-.btn-custom:hover,
-.readmore:hover {
-  transform: scale(1.08);
-  animation: hoverPulse 0.3s ease;
+/* ========== Button Pulse Animation (required) ========== */
+@keyframes buttonPulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
 }
 
-@keyframes hoverPulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.1); }
-  100% { transform: scale(1); }
+.btn,
+.btn-primary,
+.btn-custom {
+  transition: 0.2s ease;
 }
 
-/* ------------------------------
-   4. prefers-reduced-motion
---------------------------------*/
+.btn:hover,
+.btn-primary:hover,
+.btn-custom:hover {
+  animation: buttonPulse 0.4s ease-in-out;
+  box-shadow: 0 8px 18px rgba(43, 110, 242, 0.35);
+}
+
+/* ========== Decorative Floating CSS Shape (optional) ========== */
+.hero::after {
+  content: "";
+  position: absolute;
+  right: 5%;
+  bottom: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 40% 60% 60% 40%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  opacity: 0.8;
+  animation: floatBlob 8s ease-in-out infinite;
+}
+
+@keyframes floatBlob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-18px); }
+}
+
+/* ========== CSS-Only Loader ========== */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#preloader::before {
+  content: "";
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 6px solid #e0e4f2;
+  border-top-color: #2b6ef2;
+  animation: spinLoader 0.9s linear infinite;
+}
+
+@keyframes spinLoader {
+  to { transform: rotate(360deg); }
+}
+
+/* ========== Accessibility: Reduced Motion ========== */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
+
+  *, *::before, *::after {
+    animation-duration: 0.0001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.0001ms !important;
   }
 
-  .loader {
+  #preloader {
     display: none !important;
   }
 }
+
 
