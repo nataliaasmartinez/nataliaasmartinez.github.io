@@ -43,14 +43,8 @@
         <li><a href="about.html">About</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="portfolio.html">Portfolio</a></li>
-        <li class="dropdown">
-          <a href="#"><span>Dropdown</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          <ul>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </li>
-      </ul>
-      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        <li><a href="#memory-game">Memory Game</a></li>
+        
     </nav>
 
   </div>
@@ -191,7 +185,38 @@
 
     </div>
   </section>
+ <!-- MEMORY GAME SECTION -->
+  <section id="memory-game" class="section light-background">
+    <div class="container">
+      <h2 class="text-center mb-4">Memory Game</h2>
 
+      <!-- Difficulty selector -->
+      <div class="memory-controls mb-3 text-center">
+        <label for="memory-difficulty" class="me-2">Difficulty:</label>
+        <select id="memory-difficulty" class="form-select d-inline-block w-auto">
+          <option value="easy" selected>Easy (4 × 3)</option>
+          <option value="hard">Hard (6 × 4)</option>
+        </select>
+
+        <button id="start-game" class="btn btn-primary ms-3">Start</button>
+        <button id="restart-game" class="btn btn-outline-secondary ms-2">Restart</button>
+      </div>
+
+      <!-- Stats panel -->
+      <div class="memory-stats text-center mb-3">
+        <span>Moves: <strong id="memory-moves">0</strong></span>
+        <span class="ms-4">Matches: <strong id="memory-matches">0</strong></span>
+      </div>
+
+      <!-- Game board -->
+      <div id="memory-board" class="memory-board grid-easy">
+        <!-- Las cartas se generan solo con JavaScript -->
+      </div>
+
+      <!-- Win message -->
+      <div id="memory-win-message" class="memory-win-message text-center mt-3"></div>
+    </div>
+  </section>
 </main>
 
 <footer id="footer" class="footer light-background">
