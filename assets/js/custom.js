@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const contactForm = document.getElementById('contactForm');
     const submitButton = document.getElementById('submitBtn');
-
     const phoneInput = document.getElementById('phone');
     const formContainer = contactForm ? contactForm.parentNode : null;
     const FIXED_PREFIX = '+370 6';
@@ -15,13 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     submitButton.disabled = true;
 
-   // ----- RESULTS BOX -----
+    // ----- RESULTS BOX -----
     const resultsContainer = document.getElementById('formResult');
 
-
     // ----- POPUP -----
-const confirmationPopup = document.getElementById('successPopup');
-
+    const confirmationPopup = document.getElementById('successPopup');
 
     // ----- VALIDATION RULES -----
     const validationRules = {
@@ -54,43 +51,34 @@ const confirmationPopup = document.getElementById('successPopup');
 
     // ----- VALIDATION FUNCTION -----
     function validateField(input) {
-        const name = input.id;
-        const value = input.value.trim();
-        const rules = validationRules[name];
+        const { id, value } = input;
+        const rule = validationRules[id];
+        const errorDisplay = document.getElementById(`${id}-error`);
+
+        if (!rule) return true;
+
         let isValid = true;
         let errorMessage = '';
 
-        if (!rules) return true;
-
-        if (rules.required && value === '') {
+        if (rule.required && !value.trim()) {
             isValid = false;
             errorMessage = 'This field is required.';
-        } else if (rules.pattern && !rules.pattern.test(value)) {
+        } else if (rule.pattern && !rule.pattern.test(value.trim())) {
             isValid = false;
-            errorMessage = rules.error;
-        } else if (rules.minlength && value.length < rules.minlength) {
+            errorMessage = rule.error;
+        } else if (rule.minlength && value.trim().length < rule.minlength) {
             isValid = false;
-            errorMessage = rules.error;
-        }
-
-        const errorId = `error-${name}`;
-        let errorDisplay = document.getElementById(errorId);
-
-        if (!errorDisplay) {
-            errorDisplay = document.createElement('small');
-            errorDisplay.id = errorId;
-            errorDisplay.className = 'error-message-text';
-            input.parentNode.appendChild(errorDisplay);
+            errorMessage = rule.error;
         }
 
         if (isValid) {
-            input.classList.add('is-valid');
             input.classList.remove('is-invalid');
-            errorDisplay.textContent = '';
+            input.classList.add('is-valid');
+            if (errorDisplay) errorDisplay.textContent = '';
         } else {
             input.classList.add('is-invalid');
             input.classList.remove('is-valid');
-            errorDisplay.textContent = errorMessage;
+            if (errorDisplay) errorDisplay.textContent = errorMessage;
         }
 
         return isValid;
@@ -117,60 +105,109 @@ const confirmationPopup = document.getElementById('successPopup');
     phoneInput.setAttribute('maxlength', 15);
 
     if (!phoneInput.value.startsWith(FIXED_PREFIX)) {
-        phoneInput.value = FIXED_PREFIX;
+        phoneInput.value = FIXED_PREFIX + ' ';
     }
 
-    phoneInput.addEventListener('input', function () {
+    phoneInput.addEventListener('keydown', (event) => {
+        const key = event.key;
 
-        let digits = this.value.substring(FIXED_PREFIX.length)
-            .replace(/\D/g, '')
-            .substring(0, MAX_MOBILE_DIGITS);
+        if (['ArrowLeft', 'ArrowRight', 'Tab', 'Backspace', 'Delete', 'Home', 'End'].includes(key)) {
+            return;
+        }
 
-        let masked = FIXED_PREFIX;
+        if (key === ' ' || key === '+') {
+            event.preventDefault();
+            return;
+        }
 
-        if (digits.length > 0) masked += digits.substring(0, 2);
-        if (digits.length > 2) masked += ' ' + digits.substring(2, 7);
+        if (!/^\d$/.test(key)) {
+            event.preventDefault();
+            return;
+        }
 
-        this.value = masked;
+        const digitsOnly = phoneInput.value.replace(/\D/g, '');
 
-        // **ESTO ES LO QUE ESTABA ROTO — AHORA CORREGIDO**
-        this.selectionStart = this.selectionEnd = this.value.length;
-    });
-
-    phoneInput.addEventListener('blur', function () {
-        if (this.value === FIXED_PREFIX) {
-            this.value = '';
-            this.classList.remove('is-valid');
+        if (digitsOnly.length >= FIXED_PREFIX.replace(/\D/g, '').length + MAX_MOBILE_DIGITS) {
+            event.preventDefault();
         }
     });
 
-    contactForm.addEventListener('input', checkFormValidity);
+    phoneInput.addEventListener('input', () => {
+        if (!phoneInput.value.startsWith(FIXED_PREFIX)) {
+            phoneInput.value = FIXED_PREFIX + ' ';
+        }
 
-    // ----- SUBMIT -----
-    contactForm.addEventListener('submit', function (event) {
+        let digitsOnly = phoneInput.value.replace(/\D/g, '');
+        digitsOnly = digitsOnly.slice(0, FIXED_PREFIX.replace(/\D/g, '').length + MAX_MOBILE_DIGITS);
+
+        let formatted = FIXED_PREFIX;
+        const extraDigits = digitsOnly.slice(FIXED_PREFIX.replace(/\D/g, '').length);
+
+        if (extraDigits.length > 0) {
+            formatted += ' ' + extraDigits.slice(0, 2);
+        }
+        if (extraDigits.length > 2) {
+            formatted += ' ' + extraDigits.slice(2);
+        }
+
+        phoneInput.value = formatted;
+        validateField(phoneInput);
+        checkFormValidity();
+    });
+
+    // ----- EVENTS FOR VALIDATION -----
+    Object.keys(validationRules).forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', () => {
+                validateField(input);
+                checkFormValidity();
+            });
+        }
+    });
+
+    document.querySelectorAll('.rating-input').forEach(input => {
+        input.addEventListener('input', () => {
+            if (input.value < 1) input.value = 1;
+            if (input.value > 10) input.value = 10;
+            checkFormValidity();
+        });
+    });
+
+    // ----- SUBMISSION RESULT -----
+    contactForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
+        checkFormValidity();
+
+        if (submitButton.disabled) {
+            return;
+        }
+
         const data = {
-            name: document.getElementById('name').value,
-            surname: document.getElementById('surname').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            address: document.getElementById('address').value,
+            name: document.getElementById('name').value.trim(),
+            surname: document.getElementById('surname').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            address: document.getElementById('address').value.trim(),
             rating1: Number(document.getElementById('rate1').value),
             rating2: Number(document.getElementById('rate2').value),
             rating3: Number(document.getElementById('rate3').value)
-
         };
 
         console.log(data);
 
         const avg = ((data.rating1 + data.rating2 + data.rating3) / 3).toFixed(1);
 
-        let color = 'red';
-        if (avg > 4 && avg <= 7) color = 'orange';
-        if (avg > 7) color = 'green';
+        let color = 'green';
+        if (avg < 4) {
+            color = 'red';
+        } else if (avg <= 7) {
+            color = 'orange';
+        }
 
         resultsContainer.innerHTML = `
+            <h4>Submission Results</h4>
             <p><strong>Name:</strong> ${data.name}</p>
             <p><strong>Surname:</strong> ${data.surname}</p>
             <p><strong>Email:</strong> ${data.email}</p>
