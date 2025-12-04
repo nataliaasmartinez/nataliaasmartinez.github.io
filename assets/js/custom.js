@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const contactForm = document.getElementById('contact-form');
-    const submitButton = document.getElementById('submit-button');
+    const contactForm = document.getElementById('contactForm');
+    const submitButton = document.getElementById('submitBtn');
+
     const phoneInput = document.getElementById('phone');
     const formContainer = contactForm ? contactForm.parentNode : null;
     const FIXED_PREFIX = '+370 6';
@@ -14,23 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     submitButton.disabled = true;
 
-    // ----- RESULTS BOX -----
-    const resultsContainer = document.getElementById('submission-results-container') || document.createElement('div');
-    if (!document.getElementById('submission-results-container')) {
-        resultsContainer.id = 'submission-results-container';
-        resultsContainer.style.cssText =
-            'margin-top: 20px; padding: 15px; border-radius: 8px; background: #f8f9fa; ' +
-            'box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: left; max-width: 600px; margin: 20px auto 0 auto;';
-        formContainer.appendChild(resultsContainer);
-    }
+   // ----- RESULTS BOX -----
+    const resultsContainer = document.getElementById('formResult');
+
 
     // ----- POPUP -----
-    const confirmationPopup = document.getElementById('submission-confirmation') || document.createElement('div');
-    if (!document.getElementById('submission-confirmation')) {
-        confirmationPopup.id = 'submission-confirmation';
-        confirmationPopup.textContent = 'Form submitted successfully!';
-        document.body.appendChild(confirmationPopup);
-    }
+const confirmationPopup = document.getElementById('successPopup');
+
 
     // ----- VALIDATION RULES -----
     const validationRules = {
@@ -165,9 +156,10 @@ document.addEventListener('DOMContentLoaded', () => {
             email: document.getElementById('email').value,
             phone: document.getElementById('phone').value,
             address: document.getElementById('address').value,
-            rating1: Number(document.getElementById('rating1').value),
-            rating2: Number(document.getElementById('rating2').value),
-            rating3: Number(document.getElementById('rating3').value)
+            rating1: Number(document.getElementById('rate1').value),
+            rating2: Number(document.getElementById('rate2').value),
+            rating3: Number(document.getElementById('rate3').value)
+
         };
 
         console.log(data);
