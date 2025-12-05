@@ -1,164 +1,271 @@
-/**
-* Template Name: MyPortfolio
-* Template URL: https://bootstrapmade.com/myportfolio-bootstrap-portfolio-website-template/
-* Updated: Aug 08 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contact-form');
+    const submitButton = document.getElementById('submit-button');
+    const phoneInput = document.getElementById('phone');
+    const formContainer = contactForm ? contactForm.parentNode : null;
+    const FIXED_PREFIX = '+370 6';
+    const MAX_MOBILE_DIGITS = 8; // The 6xx xxxxx part
 
-(function() {
-  "use strict";
-
-  /**
-   * Apply .scrolled class to the body as the page is scrolled down
-   */
-  function toggleScrolled() {
-    const selectBody = document.querySelector('body');
-    const selectHeader = document.querySelector('#header');
-    if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
-    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
-  }
-
-  document.addEventListener('scroll', toggleScrolled);
-  window.addEventListener('load', toggleScrolled);
-
-  /**
-   * Mobile nav toggle
-   */
-  const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
-
-  function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavToggleBtn.classList.toggle('bi-list');
-    mobileNavToggleBtn.classList.toggle('bi-x');
-  }
-  mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
-
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
-      if (document.querySelector('.mobile-nav-active')) {
-        mobileNavToogle();
-      }
-    });
-
-  });
-
-  /**
-   * Toggle mobile nav dropdowns
-   */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle('active');
-      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-      e.stopImmediatePropagation();
-    });
-  });
-
-  /**
-   * Preloader
-   */
-  const preloader = document.querySelector('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove();
-    });
-  }
-
-  /**
-   * Scroll top button
-   */
-  let scrollTop = document.querySelector('.scroll-top');
-
-  function toggleScrollTop() {
-    if (scrollTop) {
-      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+    if (!contactForm || !formContainer || !phoneInput) {
+        // Essential elements must exist
+        console.error('One or more form elements not found.');
+        return;
     }
-  }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
+    
+    // Disable the submit button initially
+    submitButton.disabled = true;
 
-  window.addEventListener('load', toggleScrollTop);
-  document.addEventListener('scroll', toggleScrollTop);
-
-  /**
-   * Animation on scroll function and init
-   */
-  function aosInit() {
-    AOS.init({
-      duration: 600,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
-  }
-  window.addEventListener('load', aosInit);
-
-  /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
-
-  /**
-   * Init isotope layout and filters
-   */
-  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
-    let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
-    let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
-    let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
-
-    let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
-      initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
-        itemSelector: '.isotope-item',
-        layoutMode: layout,
-        filter: filter,
-        sortBy: sort
-      });
-    });
-
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-      filters.addEventListener('click', function() {
-        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
-        this.classList.add('filter-active');
-        initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        if (typeof aosInit === 'function') {
-          aosInit();
+    // --- DOM Elements for Result Display & Popup (Omitted for brevity, but exist) ---
+    const resultsContainer = document.getElementById('submission-results-container') || document.createElement('div');
+    if (!document.getElementById('submission-results-container')) {
+        resultsContainer.id = 'submission-results-container';
+        resultsContainer.style.cssText = 'margin-top: 20px; padding: 15px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: left; max-width: 600px; margin: 20px auto 0 auto;';
+        formContainer.appendChild(resultsContainer);
+    }
+    
+    const confirmationPopup = document.getElementById('submission-confirmation') || document.createElement('div');
+    if (!document.getElementById('submission-confirmation')) {
+        confirmationPopup.id = 'submission-confirmation';
+        confirmationPopup.textContent = 'Form submitted successfully!';
+        document.body.appendChild(confirmationPopup);
+    }
+    
+    // --- Validation Rules (Required for Task) ---
+    const validationRules = {
+        name: { 
+            required: true, 
+            pattern: /^[A-Za-zА-Яа-я\s'-]+$/, 
+            error: 'Name can only contain letters, spaces, or hyphens.'
+        },
+        surname: { 
+            required: true, 
+            pattern: /^[A-Za-zА-Яа-я\s'-]+$/, 
+            error: 'Surname can only contain letters, spaces, or hyphens.'
+        },
+        email: { 
+            required: true, 
+            pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 
+            error: 'Invalid email format (e.g., user@example.com).' 
+        },
+        phone: {
+            required: true,
+            pattern: /^\+370\s6\d{2}\s\d{5}$/, 
+            error: 'Invalid format. Must be +370 6xx xxxxx.'
+        },
+        address: {
+            required: true,
+            minlength: 5, 
+            error: 'Address must be at least 5 characters long.'
         }
-      }, false);
+    };
+
+    
+    function validateField(input) {
+        
+        const fieldName = input.id;
+        const value = input.value.trim();
+        const rules = validationRules[fieldName];
+        let isValid = true;
+        let errorMessage = '';
+
+        if (!rules) return true;
+
+        if (rules.required && value === '') {
+            isValid = false;
+            errorMessage = 'This field is required.';
+        } 
+        else if (rules.pattern && !rules.pattern.test(value)) {
+            isValid = false;
+            errorMessage = rules.error;
+        } 
+        else if (rules.minlength && value.length < rules.minlength) {
+            isValid = false;
+            errorMessage = rules.error;
+        }
+        
+        // --- Visible Feedback ---
+        const errorElementId = `error-${fieldName}`;
+        let errorDisplay = document.getElementById(errorElementId);
+
+        if (!errorDisplay) {
+            errorDisplay = document.createElement('small');
+            errorDisplay.id = errorElementId;
+            errorDisplay.className = 'error-message-text';
+            input.parentNode.appendChild(errorDisplay);
+        }
+
+        if (isValid) {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+            errorDisplay.textContent = '';
+        } else {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+            errorDisplay.textContent = errorMessage;
+        }
+
+        return isValid;
+    }
+    
+    // --- Total Form Validity Check ---
+    function checkFormValidity() {
+        // ... (checkFormValidity logic remains the same) ...
+        let isFormValid = true;
+        
+        for (const fieldId in validationRules) {
+            const input = document.getElementById(fieldId);
+            if (input && !validateField(input)) {
+                isFormValid = false;
+            }
+        }
+        
+        const ratingInputs = document.querySelectorAll('.rating-input');
+        ratingInputs.forEach(input => {
+             if (!input.checkValidity()) {
+                 isFormValid = false;
+             }
+        });
+        
+        submitButton.disabled = !isFormValid;
+    }
+
+    // --- FINAL PHONE MASKING LOGIC (The definitive fix) ---
+    if (phoneInput) {
+        phoneInput.setAttribute('maxlength', 15);
+        
+        // Ensure initial value is set correctly
+        if (!phoneInput.value.startsWith(FIXED_PREFIX)) {
+             phoneInput.value = FIXED_PREFIX;
+        }
+
+        phoneInput.addEventListener('input', function(e) {
+            let start = this.selectionStart;
+            let end = this.selectionEnd;
+
+            // 1. Remove non-digits from the input, keeping only the 8 mobile digits
+            let digits = this.value.substring(FIXED_PREFIX.length).replace(/\D/g, '').substring(0, MAX_MOBILE_DIGITS); 
+            
+            let maskedValue = FIXED_PREFIX;
+
+            // 2. Apply the 'xx xxxxx' mask
+            if (digits.length > 0) {
+                // First 2 digits (xx)
+                maskedValue += digits.substring(0, 2); 
+            }
+            if (digits.length > 2) {
+                // Add space and next 5 digits (xxxxx)
+                maskedValue += ' ' + digits.substring(2, 7);
+            }
+            
+            this.value = maskedValue;
+
+            // 3. Ensure cursor stays at the end (simplest way to handle masking and cursor)
+            this.selectionStart = this.selectionEnd = maskedValue.length;
+
+            validateField(this);
+            checkFormValidity();
+        });
+
+        // Prevent deletion of the prefix
+        phoneInput.addEventListener('keydown', function(e) {
+            if (e.target.selectionStart <= FIXED_PREFIX.length && (e.key === 'Backspace' || e.key === 'Delete')) {
+                e.preventDefault();
+            }
+        });
+
+        // Initial validation run
+        validateField(phoneInput);
+        checkFormValidity();
+    }
+
+    // --- Attach Real-time Validation Listeners ---
+    const fieldsToValidate = ['name', 'surname', 'email', 'address'];
+    fieldsToValidate.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', function() {
+                validateField(this);
+                checkFormValidity();
+            });
+            validateField(input);
+        }
     });
+    
+    // Initial check on load to set the button state
+    checkFormValidity();
+    
+    // --- Form Submission (Omitted for brevity, but exists) ---
+    contactForm.addEventListener('submit', function(event) {
+        // ... (Submit logic remains the same) ...
+        event.preventDefault();
 
-  });
+        checkFormValidity();
+        if (submitButton.disabled) {
+            alert("Please correct the errors in the form before submitting.");
+            return;
+        }
 
-  /**
-   * Init swiper sliders
-   */
-  function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
-      let config = JSON.parse(
-        swiperElement.querySelector(".swiper-config").innerHTML.trim()
-      );
+        const formData = new FormData(contactForm);
+        let data = {};
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
 
-      if (swiperElement.classList.contains("swiper-tab")) {
-        initSwiperWithCustomPagination(swiperElement, config);
-      } else {
-        new Swiper(swiperElement, config);
-      }
+        // Task 1: Print the object in the browser console
+        console.groupCollapsed('--- FORM SUBMISSION DATA OBJECT ---');
+        console.log(data); 
+        console.groupEnd();
+
+        // Calculate the average rating (Task 2 & 3)
+        const rating1 = +data.rating1 || 0; 
+        const rating2 = +data.rating2 || 0;
+        const rating3 = +data.rating3 || 0;
+        
+        const sum = rating1 + rating2 + rating3;
+        const average = (sum / 3).toFixed(1);
+
+        let colorClass = '';
+        if (average >= 7) {
+            colorClass = 'average-green';
+        } else if (average >= 4) {
+            colorClass = 'average-orange';
+        } else {
+            colorClass = 'average-red';
+        }
+        
+        // Display the data list
+        let dataListHTML = '<h4 style="text-align: center; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 10px;">Submission Details</h4><ul style="list-style-type: none; padding-left: 0; max-width: 400px; margin: 0 auto; text-align: left;">';
+        
+        const labels = {
+            name: 'Name', surname: 'Surname', email: 'Email', phone: 'Phone number', 
+            address: 'Address', rating1: 'Design Rating', rating2: 'Usefulness Rating', 
+            rating3: 'Clarity Rating'
+        };
+
+        for (const key in data) {
+            const label = labels[key] || key;
+            dataListHTML += `<li style="margin-bottom: 5px;"><strong>${label}:</strong> ${data[key]}</li>`;
+        }
+        dataListHTML += '</ul>';
+
+        const userName = `${data.name} ${data.surname}`;
+        const averageHTML = `<p style="margin-top: 15px; font-size: 1.2em; text-align: center;">
+            <strong>${userName}:</strong> <span class="average-display ${colorClass}">${average}</span>
+        </p>`;
+
+        resultsContainer.innerHTML = dataListHTML + averageHTML;
+
+        // Show a success confirmation (Task 4)
+        confirmationPopup.style.display = 'block';
+        
+        setTimeout(() => {
+            confirmationPopup.style.display = 'none';
+        }, 3000); 
+
+        // Reset the form and validation state
+        contactForm.reset();
+        document.querySelectorAll('.is-valid, .is-invalid').forEach(el => el.classList.remove('is-valid', 'is-invalid'));
+        document.querySelectorAll('.error-message-text').forEach(el => el.textContent = '');
+        checkFormValidity();
     });
-  }
-
-  window.addEventListener("load", initSwiper);
-
-})();
+});
