@@ -1,4 +1,6 @@
+maincss
 /**
+
 * Template Name: MyPortfolio
 * Template URL: https://bootstrapmade.com/myportfolio-bootstrap-portfolio-website-template/
 * Updated: Aug 08 2024 with Bootstrap v5.3.3
@@ -11,6 +13,12 @@
 # Help: https://bootstrapmade.com/color-system/
 --------------------------------------------------------------*/
 /* Fonts */
+
+:root {
+    --bs-body-font-family: "Inter", sans-serif;
+}
+
+
 :root {
   --default-font: "Inconsolata",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --heading-font: "Inconsolata",  sans-serif;
@@ -461,7 +469,7 @@ section,
 .section {
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 60px 0;
+  padding: 40px 0;
   scroll-margin-top: 90px;
   overflow: clip;
 }
@@ -523,6 +531,11 @@ section,
   transition: all 0.3s ease-in-out;
 }
 
+.portfolio .portfolio-filters li:hover,
+.portfolio .portfolio-filters li.filter-active {
+  border-bottom: 2px solid var(--default-color);
+  padding-bottom: 3px;
+}
 
 .portfolio .portfolio-filters li:first-child {
   margin-left: 0;
@@ -564,11 +577,18 @@ section,
 
 .portfolio .portfolio-content .portfolio-info h4 {
   font-size: 18px;
-  mask-border: 0;
   font-weight: 400;
   color: #ffffff;
   display: inline-block;
 }
+
+.portfolio-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 
 .portfolio .portfolio-content .portfolio-info p {
   text-align: center;
@@ -1278,10 +1298,6 @@ section,
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
 
-/* Global font choices */
-:root {
-    --bs-body-font-family: "Inter", sans-serif;
-}
 h1, h2, h3 {
     font-family: "Inter", sans-serif;
     font-weight: 600;
@@ -1355,14 +1371,14 @@ a:active {
 .card-surface {
     padding: 20px;
     border-radius: 12px;
-    background: #ffffff;
+    background: #eeeeee;
     box-shadow: 0 4px 10px rgba(0,0,0,0.06);
 }
 
 .header {
     background: #fdfdfd;
     box-shadow: 0 2px 6px rgba(0,0,0,0.07);
-}
+
 
 .header .logo {
     font-weight: 700;
@@ -1391,4 +1407,4 @@ a:active {
 }
 
 .back-to-top:hover {
-    background: #003399;ccc
+    background: #003399;
