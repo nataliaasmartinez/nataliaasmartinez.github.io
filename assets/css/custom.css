@@ -1,68 +1,8 @@
-/* ------------------------------
-   1. Loader animation
---------------------------------*/
-.loader {
-    position: fixed; /* Lo fija encima de todo */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff; /* Fondo blanco */
-    z-index: 99999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    transition: opacity 0.5s ease-out; /* Transición para que desaparezca suavemente */
-}
-
-/* Estilo del spinner */
-.loader::after {
-    content: "";
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 6px solid #ccc;
-    border-top-color: #000;
-    animation: spin 1s linear infinite;
-}
-
-/* Oculta el contenido principal mientras el body tiene la clase 'loading' */
-.loading .main, 
-.loading .header, 
-.loading .footer {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s, visibility 0s 0.5s;
-}
-
-.main, .header, .footer {
-    transition: opacity 0.5s ease-in-out;
-    opacity: 1;
-    visibility: visible;
-}
-
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ------------------------------
-   2. Fade-in animation for sections
---------------------------------*/
-/* Aplicada la clase custom-fade para mayor control y evitar conflictos */
-.custom-fade {
-    opacity: 0;
-    animation: fadeIn 1.2s ease forwards;
-    animation-delay: 0.8s; /* Retraso para que la animación empiece después de que el loader desaparezca */
-}
-
+custom css
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(20px); 
   }
   to {
     opacity: 1;
@@ -70,146 +10,323 @@
   }
 }
 
-/* ------------------------------
-   3. Hover animation for buttons
---------------------------------*/
-/* Usando .custom-hover para apuntar a los elementos con el efecto */
-.btn-custom.custom-hover,
-.readmore.custom-hover {
-  transition: transform 0.3s ease;
+.section {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
-.btn-custom.custom-hover:hover,
-.readmore.custom-hover:hover {
-  transform: scale(1.08);
-  animation: hoverPulse 0.3s ease;
+.btn-custom {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06); 
+  transition: all 0.3s ease; 
 }
 
-@keyframes hoverPulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.1); }
-  100% { transform: scale(1); }
+.btn-custom:hover {
+  transform: translateY(-2px); 
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2); 
 }
 
-/* ------------------------------
-   4. prefers-reduced-motion (Requisito 5)
---------------------------------*/
+@keyframes pulseDot {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1.0);
+  }
+}
+
+#preloader:before {
+  display: none; 
+}
+
+#preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#preloader::after {
+  content: "";
+  display: inline-block;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+  background-color: red !important;
+  animation: pulseDot 1.4s infinite ease-in-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  /* Elimina animaciones */
-  .loader,
-  .loader::after,
-  .custom-fade,
-  .btn-custom.custom-hover,
-  .readmore.custom-hover {
+  .section {
+    opacity: 1; 
     animation: none !important;
-    transition: none !important;
-    opacity: 1 !important;
     transform: none !important;
   }
 
-  .decor-shape,
-  .animated-gradient-bg {
+#preloader::after {
     animation: none !important;
   }
 
-  .loading .main,
-  .loading .header,
-  .loading .footer {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transition: none !important;
-  }
-
-  #loader {
-    display: none !important;
+.btn-custom:hover {
+    transform: none !important;
   }
 }
 
-
-  }
-
-  /* El contenido se muestra inmediatamente sin la clase loading */
-  .loading .main, .loading .header, .loading .footer {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transition: none !important;
-  }
-
-  /* Oculta el loader inmediatamente */
-  #loader {
-    display: none !important;
-  }
-
-}
-/* ------------------------------
-   5. Animated gradient background (optional task)
---------------------------------*/
-.animated-gradient-bg {
-  background: linear-gradient(120deg, #e0f4ff, #fce4ff, #fffbe6);
-  background-size: 200% 200%;
-  animation: gradientShift 12s ease-in-out infinite;
+.section {
+    background-color: #ffffff !important; 
 }
 
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-/* ------------------------------
-   6. Decorative CSS shapes (optional task)
---------------------------------*/
-.decor-shape {
-  position: fixed;
-  z-index: -1;          /* Para que queden detrás del contenido */
-  opacity: 0.4;
+#about .portfolio-info.card-surface, 
+#resume .col-lg-6.card-surface, 
+#portfolio .portfolio-item.card-surface {
+    background-color: #eeeeee !important; 
 }
 
-/* Círculo flotante */
-.decor-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: rgba(255, 183, 197, 0.8);
-  top: 12%;
-  left: 6%;
-  animation: floatShape 14s ease-in-out infinite;
+#calculatorModal .modal-content {
+  border-radius: 15px;
+  padding: 20px;
 }
 
-/* Triángulo flotante */
-.decor-triangle {
-  width: 0;
-  height: 0;
-  border-left: 80px solid transparent;
-  border-right: 80px solid transparent;
-  border-bottom: 130px solid rgba(179, 229, 252, 0.8);
-  bottom: 10%;
-  right: 8%;
-  animation: floatShape 11s ease-in-out infinite reverse;
+.preview-band {
+  width: 30px;
+  height: 50px;
+  border-radius: 4px;
+  border: 1px solid #333;
 }
 
-@keyframes floatShape {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-20px); }
-  100% { transform: translateY(0); }
-}
-#successPopup {
-  display: none;
-  background: #4caf50;
-  color: white;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 20px;
-  animation: fadeIn 0.5s;
-  text-align: center;
+#calculatorModal select {
+  cursor: pointer;
 }
 
-.popup.show {
-  display: block;
+/*contactform*/
+.rating-label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--default-color, #333); 
+    display: block; 
+    text-align: left;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.rating-input {
+    max-width: 100px; /* Make the input box smaller for the 1-10 rating */
+    text-align: center;
+}
+
+/* Style for the average display */
+.average-display {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Color codes for the average */
+.average-red {
+    background-color: #ffdddd; /* Light red background */
+    color: #cc0000; /* Dark red text */
+    border: 1px solid #cc0000;
+}
+.average-orange {
+    background-color: #ffebcc; /* Light orange background */
+    color: #e68a00; /* Dark orange text */
+    border: 1px solid #e68a00;
+}
+.average-green {
+    background-color: #ddffdd; /* Light green background */
+    color: #008000; /* Dark green text */
+    border: 1px solid #008000;
+}
+
+/* Style for the confirmation popup */
+#submission-confirmation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 40px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-size: 1.5em;
+    display: none; /* Initially hidden */
+    text-align: center;
+    /* Optional: Add a simple animation for visibility */
+    animation: fadeinout 4s forwards;
+}
+
+@keyframes fadeinout {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* --- Styles for Real-Time Validation */
+
+/* Style for invalid fields (red border) */
+.form-control.is-invalid {
+    border-color: #dc3545 !important;
+    padding-right: calc(1.5em + .75rem);
+    /* The background image shows a small 'x' or warning icon */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+/* Style for valid fields (green border) */
+.form-control.is-valid {
+    border-color: #198754 !important;
+    padding-right: calc(1.5em + .75rem);
+    /* The background image shows a small checkmark icon */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-.4-.3-1 .1-1.4.4-.4 1-.3 1.4.1l1.7 2 4.1-4.3c.4-.4 1-.3 1.4.1.4.4.3 1-.1 1.4l-4.8 5.1c-.2.2-.5.3-.8.3-.3 0-.6-.1-.8-.3z'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+/* Style for the error message text (Task 2) */
+.error-message-text {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545; /* Red color */
+}
+
+/* Style for disabled button (Task 4) */
+#submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Ensure rating labels are centered  */
+.rating-label {
+    text-align: center;
+}
+
+/* --- Memory Game Styles  --- */
+
+#memory-game .card-surface {
+    max-width: 900px;
+}
+
+/* FIX: Ensure grid display and 4 columns are enforced for layout */
+#game-board {
+    display: grid !important; 
+    grid-template-columns: repeat(4, 1fr); /* Enforces 4 columns (4x3 or 4x4) */
+    justify-content: center;
+    gap: 10px; 
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+/* Card Styles */
+.memory-card {
+    width: 100%; /* Take full width of the grid cell */
+    aspect-ratio: 1 / 1; /* Make it perfectly square */
+    cursor: pointer;
+    perspective: 1000px; 
+    transition: all 0.2s;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+/* Inner card content (front and back) */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+/* Apply the flip rotation */
+.memory-card.flip .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hide the back of the face when flipped */
+    border-radius: 8px;
+    
+    /* Crucial for centering the images/icons */
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.card-back {
+    background: #0044cc; /* Back face color (Blue from btn-custom) */
+    color: white;
+    transform: rotateY(0deg);
+    border: 3px solid #003399;
+    
+    /* Ensure image or text is centered within the back face */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.card-front {
+    background: #ffffff; /* Front face color (White) */
+    color: #333333;
+    transform: rotateY(180deg);
+    border: 3px solid #ddd;
+}
+
+/* Matched and Disabled State */
+.memory-card.match .card-front,
+.memory-card.match .card-back {
+    border-color: #008000; /* Green border for matched cards */
+}
+
+.memory-card.disabled {
+    pointer-events: none; /* Disable clicking while checking a match */
+}
+
+/* FIX: Image and Icon Sizing Rules (Ensure content fits) */
+
+.memory-card .card-image,
+.card-back .back-image { 
+    max-width: 90%;
+    max-height: 90%;
+    width: 90%;
+    height: 90%; 
+    object-fit: contain; 
+    display: block; 
+}
+
+/* Style for icons */
+.card-front i {
+    font-size: 36px;
+}
+
+@media (max-width: 576px) {
+    #game-board {
+        gap: 5px;
+        padding: 10px;
+        max-width: 350px;
+    }
+    .card-front i {
+        font-size: 24px;
+    }
 }
 
 
