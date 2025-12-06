@@ -443,6 +443,14 @@ function calculateResistor() {
 /* Load dropdown values when modal opens */
 document.getElementById("calculatorModal").addEventListener("shown.bs.modal", loadOptions);
 </script>
+ <script>
+  window.addEventListener('load', function () {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.style.display = 'none';
+    }
+  });
+</script>
   
 </body>
 
