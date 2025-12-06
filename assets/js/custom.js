@@ -1,4 +1,3 @@
-cusomjs
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contact-form');
     const submitButton = document.getElementById('submit-button');
