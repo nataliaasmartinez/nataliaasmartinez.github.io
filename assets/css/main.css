@@ -1378,13 +1378,13 @@ a:active {
 .header {
     background: #fdfdfd;
     box-shadow: 0 2px 6px rgba(0,0,0,0.07);
-
+}
 
 .header .logo {
     font-weight: 700;
     font-size: 1.4rem;
     letter-spacing: -0.3px;
-}
+ }
 
 .navmenu a {
     padding: 10px 18px;
